@@ -36,8 +36,8 @@ app.on('ready', () => {
         win = null
         app.quit()
     })
-
-    win.loadURL('http://specialnaturalive.com/mpos')
+   win.loadURL(`file://${__dirname}/renderer/index.html`)
+   // win.loadURL('http://specialnaturalive.com/mpos')
 })
 
 //app.quit()
