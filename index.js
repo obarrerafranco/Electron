@@ -9,12 +9,35 @@ app.on('before-quit', () => {
 })
 
 app.on('ready', () => {
-    let win = new BrowserWindow()
+    let win = new BrowserWindow({
+        //configuracion de la nueva ventana
+        width:800,
+        height:600,
+        title: 'Hola mundo!',
+        center:true,
+        maximizable: false,
+        //fullscreen: true,
+        show: false
+    })
 
+//cargar una url
+    win.once('ready-to-show', () => {
+        win.show()
+    })
+
+    //saber la posicion de la ventana
+    win.on ('move', () => {
+        const position = win.getPosition()
+        console.log(`la posición es ${position}`)
+    })
+
+    //cerrar la ventana
     win.on('closed', () => {
         win = null
         app.quit()
     })
+
+    win.loadURL('http://specialnaturalive.com/mpos')
 })
 
 //app.quit()
