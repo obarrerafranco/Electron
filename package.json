@@ -4,12 +4,23 @@
   "description": "Aplicativo de electron para visualizar imagenes",
   "main": "index.js",
   "scripts": {
-    "dev": "electron src/index.js",
+    "dev": "cross-env NODE_ENV=development electron src/index.js",
+    "lint": "standard",
+    "lint-fix": "standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "electron": "^1.7.8"
+    "cross-env": "^5.0.5",
+    "electron-compile": "^6.4.2",
+    "electron-debug": "^1.4.0",
+    "electron-prebuilt-compile": "^1.7.8",
+    "r": "0.0.5"
+  },
+  "devDependencies": {
+    "devtron": "^1.4.0",
+    "electron-prebuilt-compile": "^1.7.8",
+    "standard": "^10.0.3"
   }
 }
