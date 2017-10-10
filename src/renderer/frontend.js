@@ -2,14 +2,24 @@
 import url from 'url'
 import path from 'path'
 import { applyFilter } from './filters'  
+import { setIpc, sendIpc } from './ipcRendererEvents' 
 
 window.addEventListener('load', () => {
   //document.getElementById('mensaje').innerHTML = 'Este es un mensaje de JS'
   //console.log(os.cpus()) //imprime cpu del equipo
+  setIpc();
   addImagesEvents() //cambia la imagen grande
   searchImagesEvent() //busqueda de imagenes
   selectEvent() //filtros
+  openDirectory()
 })
+
+function openDirectory () {
+  const openDirectory = document.getElementById('open-directory')
+  openDirectory.addEventListener('click', () => {
+    sendIpc()
+  })
+}
 
 function addImagesEvents () {
   const thumbs = document.querySelectorAll('li.list-group-item')

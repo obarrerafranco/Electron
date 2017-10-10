@@ -1,7 +1,7 @@
 'use strict'
 
 // const { app, BrowserWindow } = require('electron')
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import devtools from './devtools'
 
 if (process.env.NODE_ENV === 'development') {
@@ -41,10 +41,16 @@ app.on('ready', () => {
   win.on('closed', () => {
     win = null
     app.quit()
+    
   })
   win.loadURL(`file://${__dirname}/renderer/index.html`)
    // win.loadURL('http://specialnaturalive.com/mpos')
   // win.toggleDevTools() //permite ver el inspector de chrome
+})
+
+ipcMain.on('ping', (event, arg) => {
+  console.log(`se recibio ping - ${arg}`)
+  event.sender.send('pong', new Date())
 })
 
 // app.quit()
