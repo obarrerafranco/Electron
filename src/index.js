@@ -1,8 +1,13 @@
 'use strict'
 
 // const { app, BrowserWindow } = require('electron')
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'
 import devtools from './devtools'
+import isImage from 'is-image'
+import filesize from 'filesize'
+import fs from 'fs'
+import path from 'path'
+let win
 
 if (process.env.NODE_ENV === 'development') {
   devtools()
@@ -15,7 +20,7 @@ app.on('before-quit', () => {
 })
 
 app.on('ready', () => {
-  let win = new BrowserWindow({
+ win = new BrowserWindow({
         // configuracion de la nueva ventana
     width: 800,
     height: 600,
@@ -48,9 +53,30 @@ app.on('ready', () => {
   // win.toggleDevTools() //permite ver el inspector de chrome
 })
 
-ipcMain.on('ping', (event, arg) => {
-  console.log(`se recibio ping - ${arg}`)
-  event.sender.send('pong', new Date())
+ipcMain.on('open-directory', (event) => {
+  dialog.showOpenDialog(win,{
+    title: 'Seleccione la nueva ubicación',
+    buttonLabel: 'Abrir Ubicación',
+    properties: ['openDirectory']
+  },
+(dir) => {
+  const images = []
+  if (dir) {
+    fs.readdir(dir[0], (err, files) => {
+      for(var i = 0, lenght1 = files.length; i < lenght1; i++){
+        if (isImage(files[i])) {
+          let imageFile = path.join(dir[0], files[i])
+          let stats = fs.statSync(imageFile)
+          let size = filesize(stats.size, {round:0})
+          images.push({filename : files[i], src: `file://${imageFile}`, size: size})
+         }
+      }
+      console.log(images)
+
+    })
+  }
+  //console.log(dir)
+})
 })
 
 // app.quit()

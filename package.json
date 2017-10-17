@@ -16,6 +16,8 @@
     "electron-compile": "^6.4.2",
     "electron-debug": "^1.4.0",
     "electron-prebuilt-compile": "^1.7.8",
+    "filesize": "^3.5.10",
+    "is-image": "^2.0.0",
     "r": "0.0.5"
   },
   "devDependencies": {
