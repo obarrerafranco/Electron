@@ -46,6 +46,8 @@ function changeImage (node) {
   document.getElementById('image-displayed').src = ''
 }
 }
+
+
  
 function searchImagesEvent () {
  const searchBox = document.getElementById('search-box')

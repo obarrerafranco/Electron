@@ -71,7 +71,9 @@ ipcMain.on('open-directory', (event) => {
           images.push({filename : files[i], src: `file://${imageFile}`, size: size})
          }
       }
-      console.log(images)
+      //console.log(images)
+
+      event.sender.send('load-images', images)
 
     })
   }
