@@ -3,6 +3,7 @@
 // const { app, BrowserWindow } = require('electron')
 import { app, BrowserWindow, ipcMain, dialog } from 'electron'
 import devtools from './devtools'
+import { setupErrors } from './handle-errors'
 import isImage from 'is-image'
 import filesize from 'filesize'
 import fs from 'fs'
@@ -30,6 +31,7 @@ app.on('ready', () => {
         // fullscreen: true,
     show: false
   })
+  setupErrors(win)
 
 // cargar una url
   win.once('ready-to-show', () => {
