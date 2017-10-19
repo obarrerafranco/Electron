@@ -45,6 +45,7 @@ function changeImage (node) {
     const image = document.getElementById('image-displayed')
     image.src = node.querySelector('img').src
     image.dataset.original = image.src 
+    document.getElementById('filters').selectedIndez = 0
   }else{
     document.getElementById('image-displayed').src = ''
   }

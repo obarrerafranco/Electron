@@ -95,6 +95,14 @@ ipcMain.on('open-save-dialog', (event, ext) => {
   }))
 })
 
+ipcMain.on('show-dialog', (event, info) => {
+  dialog.showMessageBox(win, {
+    type: info.type,
+    title: info.title,
+    message: info.message
+  })
+})
+
 
 
 // app.quit()
